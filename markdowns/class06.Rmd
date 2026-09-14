@@ -1,0 +1,37 @@
+---
+title: "Class 06"
+date: "2026-09-14"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    code_download: TRUE
+    code_folding: SHOW
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Kahoot 02
+
+```{r Kahoot}
+run = readr::read_csv(
+  "https://isa401-find-your-seat.vercel.app/api/export?section=A&run=13")
+dplyr::glimpse(run)
+```
+
+# Class06
+
+```{r class06}
+con = DBI::dbConnect(RSQLite::SQLite(),
+                     "../data/scout.db")
+DBI::dbListTables(con)
+postings = DBI::dbReadTable(con, "scout_postings")
+DBI::dbDisconnect(con)
+dplyr::glimpse(postings[, c("title", "company",
+  "location_state", "remote", "skills_json")])
+```
+
