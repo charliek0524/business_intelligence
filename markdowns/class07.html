@@ -1647,8 +1647,39 @@ jobs|&gt;
 ## 1 federal         548       0     
 ## 2 fulltime       1257       0.100 
 ## 3 internship       86       0.0116</code></pre>
+<pre class="r"><code># Q2 -- Among full-time postings, which states have the highest remote share?
+# This is a different answer from the slide, it shows the combination of category and state -- should give same answer
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNsYXNzMDciDQpkYXRlOiAiMjAyNi0wOS0xNiINCm91dHB1dDogDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgdG9jOiBUUlVFDQogICAgdG9jX2Zsb2F0OiBUUlVFDQogICAgbnVtYmVyX3NlY3Rpb25zOiBUUlVFDQogICAgY29kZV9kb3dubG9hZDogVFJVRQ0KICAgIGNvZGVfZm9sZGluZzogc2hvdw0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCiNBbnN3ZXJpbmcgdGhlIFF1ZXN0aW9uIGFib3V0IERhdGEgVHlwZXMNCg0KYGBge3IgYW5zd2VyX3RvX3F9DQpjb24gPSBEQkk6OmRiQ29ubmVjdChSU1FMaXRlOjpTUUxpdGUoKSwgIi4uL2RhdGEvc2NvdXQuZGIiKQ0KcG9zdGluZ3MgPSBEQkk6OmRiUmVhZFRhYmxlKGNvbiwgInNjb3V0X3Bvc3RpbmdzIikgfD4gdGliYmxlOjphc190aWJibGUoKQ0KREJJOjpkYkRpc2Nvbm5lY3QoY29uKQ0KDQpqb2JzID0gcG9zdGluZ3MgfD4NCiAgZHBseXI6OnNlbGVjdChjb21wYW55LCB0aXRsZSwgbG9jYXRpb25fc3RhdGUsIHJlbW90ZSwgY2F0ZWdvcnksIHBvc3RlZF9hdCwgbGFzdF9zZWVuX2F0KSB8Pg0KICBkcGx5cjo6ZmlsdGVyKHJlbW90ZSA9PSAxKSB8Pg0KICBkcGx5cjo6bXV0YXRlKA0KICAgIHBvc3RlZF9hdCA9IGFzLkRhdGUocG9zdGVkX2F0KSwNCiAgICBsYXN0X3NlZW5fYXQgPSBhcy5EYXRlKGxhc3Rfc2Vlbl9hdCksDQogICAgZGF5c19vcGVuID0gYXMubnVtZXJpYyhsYXN0X3NlZW5fYXQgLSBwb3N0ZWRfYXQpDQogICAgKQ0KDQpgYGANCg0KIyNEZW1vDQoNCmBgYHtyfQ0KY29uID0gREJJOjpkYkNvbm5lY3QoUlNRTGl0ZTo6U1FMaXRlKCksICIuLi9kYXRhL3Njb3V0LmRiIikNCnBvc3RpbmdzID0gREJJOjpkYlJlYWRUYWJsZShjb24sICJzY291dF9wb3N0aW5ncyIpIHw+IHRpYmJsZTo6YXNfdGliYmxlKCkNCkRCSTo6ZGJEaXNjb25uZWN0KGNvbikNCg0Kam9icyA9IHBvc3RpbmdzIHw+DQogIGRwbHlyOjpzZWxlY3QoY29tcGFueSwgdGl0bGUsIGxvY2F0aW9uX3N0YXRlLCByZW1vdGUsIGNhdGVnb3J5LCBwb3N0ZWRfYXQsIGxhc3Rfc2Vlbl9hdCkgfD4NCiAgZHBseXI6Om11dGF0ZShkcGx5cjo6YWNyb3NzKGRwbHlyOjplbmRzX3dpdGgoIl9hdCIpLCBhcy5EYXRlKSwNCiAgICAgICAgICAgICAgICBkYXlzX29wZW4gPSBhcy5udW1lcmljKGxhc3Rfc2Vlbl9hdCAtIHBvc3RlZF9hdCkpDQpqb2JzDQoNCiMgUTEgLS0gd2hpY2ggY2F0IGlzIHJlbW90ZSBmcmllbmRseQ0KIyB0byBhbnN3ZXIgdGhhdCwgdGhlIGxvZ2ljIHdvdWxkIGJlIGFzIGZvbGxvd3MiDQojIC0gRmluZCB0aGUgbnVtYmVyIG9mIGpvYnMgcGVyIGNhdGVnb3J5DQojIC0gTm9ybWFsaXplIHRoZSBudW1iZXIgb2YgcmVtb3RlIGpvYnMgYnkgZGl2aWRpbmcgYnkgdGhlIHRvdGFsIGpvYnMNCg0Kam9ic3w+DQogICMgSSB3YW50IHRvIG1vdmUgZnJvbSB1bml0IG9mIGFuYWx5c2lzIGJlaW5nIGEgam9iIHBvc3RpbmcgdG8gYSBjYXRlZ29yeQ0KICBkcGx5cjo6Z3JvdXBfYnkoY2F0ZWdvcnkpIHw+DQogIGRwbHlyOjpzdW1tYXJpc2UoDQogICAgcG9zdGluZ3MgPSBkcGx5cjo6bigpLCByZW1vdGVfc2hhcmUgID0gbWVhbihyZW1vdGUpDQogICkNCg0KYGBgDQo=</div>
+jobs |&gt;
+  dplyr::group_by(category, location_state) |&gt;
+  dplyr::summarise(
+    postings = dplyr::n(),
+    remote_share = mean(remote) |&gt; round(digits = 2)
+  ) |&gt;
+  dplyr::arrange(dplyr::desc(remote_share))</code></pre>
+<pre><code>## `summarise()` has regrouped the output.
+## ℹ Summaries were computed grouped by category and location_state.
+## ℹ Output is grouped by category.
+## ℹ Use `summarise(.groups = &quot;drop_last&quot;)` to silence this message.
+## ℹ Use `summarise(.by = c(category, location_state))` for per-operation grouping
+##   (`?dplyr::dplyr_by`) instead.</code></pre>
+<pre><code>## # A tibble: 70 × 4
+## # Groups:   category [3]
+##    category location_state postings remote_share
+##    &lt;chr&gt;    &lt;chr&gt;             &lt;int&gt;        &lt;dbl&gt;
+##  1 fulltime &lt;NA&gt;                  7         0.43
+##  2 fulltime OH                   95         0.18
+##  3 fulltime NC                   98         0.13
+##  4 fulltime KY                   18         0.11
+##  5 fulltime PA                   79         0.11
+##  6 fulltime IL                  125         0.1 
+##  7 fulltime IN                   52         0.1 
+##  8 fulltime NY                  156         0.1 
+##  9 fulltime TX                  248         0.1 
+## 10 fulltime GA                  106         0.08
+## # ℹ 60 more rows</code></pre>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNsYXNzMDciDQpkYXRlOiAiMjAyNi0wOS0xNiINCm91dHB1dDogDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgdG9jOiBUUlVFDQogICAgdG9jX2Zsb2F0OiBUUlVFDQogICAgbnVtYmVyX3NlY3Rpb25zOiBUUlVFDQogICAgY29kZV9kb3dubG9hZDogVFJVRQ0KICAgIGNvZGVfZm9sZGluZzogc2hvdw0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCiNBbnN3ZXJpbmcgdGhlIFF1ZXN0aW9uIGFib3V0IERhdGEgVHlwZXMNCg0KYGBge3IgYW5zd2VyX3RvX3F9DQpjb24gPSBEQkk6OmRiQ29ubmVjdChSU1FMaXRlOjpTUUxpdGUoKSwgIi4uL2RhdGEvc2NvdXQuZGIiKQ0KcG9zdGluZ3MgPSBEQkk6OmRiUmVhZFRhYmxlKGNvbiwgInNjb3V0X3Bvc3RpbmdzIikgfD4gdGliYmxlOjphc190aWJibGUoKQ0KREJJOjpkYkRpc2Nvbm5lY3QoY29uKQ0KDQpqb2JzID0gcG9zdGluZ3MgfD4NCiAgZHBseXI6OnNlbGVjdChjb21wYW55LCB0aXRsZSwgbG9jYXRpb25fc3RhdGUsIHJlbW90ZSwgY2F0ZWdvcnksIHBvc3RlZF9hdCwgbGFzdF9zZWVuX2F0KSB8Pg0KICBkcGx5cjo6ZmlsdGVyKHJlbW90ZSA9PSAxKSB8Pg0KICBkcGx5cjo6bXV0YXRlKA0KICAgIHBvc3RlZF9hdCA9IGFzLkRhdGUocG9zdGVkX2F0KSwNCiAgICBsYXN0X3NlZW5fYXQgPSBhcy5EYXRlKGxhc3Rfc2Vlbl9hdCksDQogICAgZGF5c19vcGVuID0gYXMubnVtZXJpYyhsYXN0X3NlZW5fYXQgLSBwb3N0ZWRfYXQpDQogICAgKQ0KDQpgYGANCg0KIyNEZW1vDQoNCmBgYHtyfQ0KY29uID0gREJJOjpkYkNvbm5lY3QoUlNRTGl0ZTo6U1FMaXRlKCksICIuLi9kYXRhL3Njb3V0LmRiIikNCnBvc3RpbmdzID0gREJJOjpkYlJlYWRUYWJsZShjb24sICJzY291dF9wb3N0aW5ncyIpIHw+IHRpYmJsZTo6YXNfdGliYmxlKCkNCkRCSTo6ZGJEaXNjb25uZWN0KGNvbikNCg0Kam9icyA9IHBvc3RpbmdzIHw+DQogIGRwbHlyOjpzZWxlY3QoY29tcGFueSwgdGl0bGUsIGxvY2F0aW9uX3N0YXRlLCByZW1vdGUsIGNhdGVnb3J5LCBwb3N0ZWRfYXQsIGxhc3Rfc2Vlbl9hdCkgfD4NCiAgZHBseXI6Om11dGF0ZShkcGx5cjo6YWNyb3NzKGRwbHlyOjplbmRzX3dpdGgoIl9hdCIpLCBhcy5EYXRlKSwNCiAgICAgICAgICAgICAgICBkYXlzX29wZW4gPSBhcy5udW1lcmljKGxhc3Rfc2Vlbl9hdCAtIHBvc3RlZF9hdCkpDQpqb2JzDQoNCiMgUTEgLS0gd2hpY2ggY2F0IGlzIHJlbW90ZSBmcmllbmRseQ0KIyB0byBhbnN3ZXIgdGhhdCwgdGhlIGxvZ2ljIHdvdWxkIGJlIGFzIGZvbGxvd3MiDQojIC0gRmluZCB0aGUgbnVtYmVyIG9mIGpvYnMgcGVyIGNhdGVnb3J5DQojIC0gTm9ybWFsaXplIHRoZSBudW1iZXIgb2YgcmVtb3RlIGpvYnMgYnkgZGl2aWRpbmcgYnkgdGhlIHRvdGFsIGpvYnMNCg0Kam9ic3w+DQogICMgSSB3YW50IHRvIG1vdmUgZnJvbSB1bml0IG9mIGFuYWx5c2lzIGJlaW5nIGEgam9iIHBvc3RpbmcgdG8gYSBjYXRlZ29yeQ0KICBkcGx5cjo6Z3JvdXBfYnkoY2F0ZWdvcnkpIHw+DQogIGRwbHlyOjpzdW1tYXJpc2UoDQogICAgcG9zdGluZ3MgPSBkcGx5cjo6bigpLCByZW1vdGVfc2hhcmUgID0gbWVhbihyZW1vdGUpDQogICkNCg0KIyBRMiAtLSBBbW9uZyBmdWxsLXRpbWUgcG9zdGluZ3MsIHdoaWNoIHN0YXRlcyBoYXZlIHRoZSBoaWdoZXN0IHJlbW90ZSBzaGFyZT8NCiMgVGhpcyBpcyBhIGRpZmZlcmVudCBhbnN3ZXIgZnJvbSB0aGUgc2xpZGUsIGl0IHNob3dzIHRoZSBjb21iaW5hdGlvbiBvZiBjYXRlZ29yeSBhbmQgc3RhdGUgLS0gc2hvdWxkIGdpdmUgc2FtZSBhbnN3ZXINCg0Kam9icyB8Pg0KICBkcGx5cjo6Z3JvdXBfYnkoY2F0ZWdvcnksIGxvY2F0aW9uX3N0YXRlKSB8Pg0KICBkcGx5cjo6c3VtbWFyaXNlKA0KICAgIHBvc3RpbmdzID0gZHBseXI6Om4oKSwNCiAgICByZW1vdGVfc2hhcmUgPSBtZWFuKHJlbW90ZSkgfD4gcm91bmQoZGlnaXRzID0gMikNCiAgKSB8Pg0KICBkcGx5cjo6YXJyYW5nZShkcGx5cjo6ZGVzYyhyZW1vdGVfc2hhcmUpKQ0KYGBgDQo=</div>
 
 
 </div>

@@ -57,4 +57,55 @@ jobs|>
     postings = dplyr::n(), remote_share  = mean(remote)
   )
 
+# Q2 -- Among full-time postings, which states have the highest remote share?
+# This is a different answer from the slide, it shows the combination of category and state -- should give same answer
+
+jobs |>
+  dplyr::group_by(category, location_state) |>
+  dplyr::summarise(
+    postings = dplyr::n(),
+    remote_share = mean(remote) |> round(digits = 2)
+  ) |>
+  dplyr::arrange(dplyr::desc(remote_share)) |> 
+na.omit()
 ```
+
+## Airbnb
+
+```{r}
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/midwest_airbnb.db")
+listings = DBI::dbReadTable(con, "listings") |>
+  tibble::as_tibble()
+DBI::dbDisconnect(con)
+dplyr::glimpse(listings)
+
+#1. How many listings per city?
+
+listings |> dplyr::group_by(city) |> dplyr::summarise(count = dplyr::n())
+#shortcut
+listings |> dplyr::count(city)
+
+#the other option is to simply count the number of times each city occurred in the col city
+
+table(listings$city) # returns a named vector vs above we get a data.frame/tibble
+
+#2 -- For entire homes (room_type == "Entire home/apt") that sleep four or more, what is the median price in each city?
+listings |>
+  dplyr::filter(
+    room_type == "Entire home/apt" & accommodates >= 4
+  ) |> 
+  dplyr::group_by(city) |> 
+  dplyr::summarise(
+    median_price = median(price)
+  )
+```
+
+
+
+
+
+
+
+
+
+
