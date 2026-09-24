@@ -1,4 +1,5 @@
 # apps/job_scout_chat/app.R
+install.packages("querychat", dependencies = T)
 library(querychat)
 
 con = DBI::dbConnect(RSQLite::SQLite(), "data/scout.db")
@@ -17,3 +18,4 @@ qc = querychat::querychat(
 )
 
 qc$app_obj()
+
