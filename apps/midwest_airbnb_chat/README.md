@@ -18,6 +18,9 @@ Do superhosts charge more per night than other hosts? Show it as a bar chart.
 
 The bar chart compares average nightly prices for superhosts and other hosts. Use it to assess whether superhost status is associated with higher prices; averages may be influenced by unusually expensive listings.
 
+How many listings could host a party of ten?
+
+1,745 listings could host a party of ten, based on listings with accommodates >= 10.
 
 # ISA 401 Job Scout Chat
 
