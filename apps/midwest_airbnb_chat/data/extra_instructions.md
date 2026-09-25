@@ -9,3 +9,5 @@ Rules the LLM follows when it writes SQL for `listings`.
      not booleans; how to match a city name the user types; how to search `name`
      case-insensitively; and whether to ignore rows whose `review_scores_rating`
      is NULL when averaging ratings. -->
+- `host_is_superhost` and `instant_bookable` use 't' and 'f' as the values instead of TRUE and FALSE
+- When averaging the listings ratings, ignore rows whose `review_scores_rating` is NULL
