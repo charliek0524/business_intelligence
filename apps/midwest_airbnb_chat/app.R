@@ -18,7 +18,7 @@ qc = querychat::querychat(
   extra_instructions = "data/extra_instructions.md"
 )
 
-qc$app_obj()
+
 
 library(bslib)
 
@@ -33,4 +33,4 @@ ui = bslib::page_sidebar(
                    bslib::accordion_panel("SQL", verbatimTextOutput("sql")),
                    bslib::accordion_panel("About", "Airbnb Listings in Chicago, Columbus, and the Twin Cities"))
 )
-shinyApp(ui = ui, server = server)
+qc$app_obj()
