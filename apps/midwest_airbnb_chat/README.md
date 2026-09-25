@@ -12,6 +12,7 @@ short_description: Ask questions about ChatISA Job Scout postings
 **Live app:** https://midwest-airbnb-chat-4j7j.onrender.com
 Which Columbus neighbourhood has the priciest entire homes?
 
+Westland has the priciest entire homes in Columbus, averaging $409 per night across 16 listings.
 
 # ISA 401 Job Scout Chat
 
