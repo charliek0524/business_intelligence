@@ -14,6 +14,11 @@ Which Columbus neighbourhood has the priciest entire homes?
 
 Westland has the priciest entire homes in Columbus, averaging $409 per night across 16 listings.
 
+Do superhosts charge more per night than other hosts? Show it as a bar chart.
+
+The bar chart compares average nightly prices for superhosts and other hosts. Use it to assess whether superhost status is associated with higher prices; averages may be influenced by unusually expensive listings.
+
+
 # ISA 401 Job Scout Chat
 
 **Ask a question in plain English, get the SQL and a table back**
