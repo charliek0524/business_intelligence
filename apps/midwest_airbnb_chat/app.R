@@ -33,3 +33,4 @@ ui = bslib::page_sidebar(
                    bslib::accordion_panel("SQL", verbatimTextOutput("sql")),
                    bslib::accordion_panel("About", "Airbnb Listings in Chicago, Columbus, and the Twin Cities"))
 )
+shinyApp(ui = ui, server = server)
