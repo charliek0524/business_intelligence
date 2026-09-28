@@ -20,12 +20,16 @@ qc = querychat::querychat(
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c8d5c415260d11b460841dc0b07609bc45ededbe
 library(bslib)
 
 ui = bslib::page_sidebar(
   title   = "Midwest Airbnb Chat",
   theme   = bslib::bs_theme(primary = "#C3142D",
+<<<<<<< HEAD
                      base_font = bslib::font_google("Lato")),
   sidebar = qc$sidebar(width = 350),
  bslib::card(bslib::card_header(textOutput("title")),
@@ -33,5 +37,14 @@ ui = bslib::page_sidebar(
   bslib::accordion(open = FALSE,
             bslib::accordion_panel("SQL", verbatimTextOutput("sql")),
             bslib::accordion_panel("About", "Airbnb Listings in Chicago, Columbus, and the Twin Cities"))
+=======
+                            base_font = bslib::font_google("Lato")),
+  sidebar = qc$sidebar(width = 350),
+  bslib::card(bslib::card_header(textOutput("title")),
+              DT::DTOutput("table")),
+  bslib::accordion(open = FALSE,
+                   bslib::accordion_panel("SQL", verbatimTextOutput("sql")),
+                   bslib::accordion_panel("About", "Airbnb Listings in Chicago, Columbus, and the Twin Cities"))
+>>>>>>> c8d5c415260d11b460841dc0b07609bc45ededbe
 )
 qc$app_obj()
