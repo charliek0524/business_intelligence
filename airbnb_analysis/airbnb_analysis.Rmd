@@ -1,0 +1,139 @@
+---
+title: "airbnb_analysis"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_download: true
+    code_folding: show
+date: "2026-09-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r read tables}
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/midwest_airbnb_extended.db")
+listings     = DBI::dbReadTable(con, "listings") |> tibble::as_tibble()
+availability = DBI::dbReadTable(con, "availability_monthly") |> tibble::as_tibble()
+reviews      = DBI::dbReadTable(con, "reviews_monthly") |> tibble::as_tibble()
+DBI::dbDisconnect(con)
+```
+
+##Task 1
+```{r}
+counts_host <- listings |>
+  dplyr::group_by(host_id) |>
+  dplyr::summarize(n = dplyr::n())
+
+column_joined <- listings |> 
+  dplyr::left_join(counts_host, by = "host_id")
+
+counts_host |> 
+  dplyr::filter(n >= 10) |> 
+  dplyr::summarize(n = dplyr::n())
+
+column_joined |> 
+  dplyr::filter(city == 'Chicago') |> 
+  dplyr::summarize(percent = mean(n>=10)*100)
+  
+```
+##Task 2
+```{r}
+listings |> 
+  dplyr::filter(room_type == "Entire home/apt", accommodates >= 4, number_of_reviews >= 10, review_scores_rating >=4.8) |>
+  dplyr::mutate(price_per_person = price/accommodates) |>
+  dplyr::group_by(city, neighbourhood) |>
+  dplyr::summarize(median_price_per_person = median(price_per_person, na.rm = TRUE), n = dplyr::n()
+) |>
+  dplyr::filter(n>=20, city == 'Columbus') |> 
+  dplyr::arrange(median_price_per_person)
+```
+##Task 3
+```{r}
+listings |> 
+  dplyr::group_by(city, room_type) |> 
+  dplyr::summarize(dplyr::across(c(price, reviews_per_month, estimated_revenue_l365d), median, na.rm = TRUE)) |> 
+  dplyr::filter(city == "Twin Cities", room_type == "Entire home/apt")
+```
+##Task 4
+```{r}
+listings |> 
+  dplyr::arrange(desc(estimated_revenue_l365d)) |> 
+  dplyr::group_by(city) |> 
+  dplyr::mutate(top10percent = dplyr::row_number() <= ceiling(0.10 * dplyr::n())) |> 
+  dplyr::filter(city == 'Columbus') |> 
+  dplyr::summarize(percent = 100 * sum(estimated_revenue_l365d[top10percent], na.rm = TRUE) /
+sum(estimated_revenue_l365d, na.rm = TRUE) )
+```
+##Task 5
+```{r}
+listings |> 
+  dplyr::filter(room_type == "Entire home/apt") |> 
+  dplyr::inner_join(availability |> dplyr::filter(month == "2026-10"), by = "id") |> 
+  dplyr::group_by(city) |> 
+  dplyr::summarize(mostly_taken = 100*mean(nights_available < 0.5 * nights_in_month, na.rm = TRUE)) |> 
+  dplyr::arrange(mostly_taken)
+```
+##Task 6
+
+```{r}
+listings |> 
+  dplyr::inner_join(reviews, by = 'id') |> 
+  dplyr::filter(month>= '2025-07', month <= '2026-06') |> 
+  dplyr::group_by(city, month) |> 
+  dplyr::summarize(total_reviews = sum(reviews, na.rm = TRUE)) |> 
+  dplyr::filter(city == 'Twin Cities') |> 
+  dplyr::arrange(desc(total_reviews))
+
+listings |> 
+  dplyr::inner_join(reviews, by = 'id') |> 
+  dplyr::filter(month>= '2025-07', month <= '2026-06') |> 
+  dplyr::group_by(city, month) |> 
+  dplyr::summarize(total_reviews = sum(reviews, na.rm = TRUE)) |> 
+  dplyr::filter(city == 'Twin Cities') |> 
+  dplyr::summarize(ratio_reviews = (max(total_reviews)/min(total_reviews)))
+```
+##Task 8
+
+```{r}
+listings |> 
+  dplyr::anti_join(availability, by = 'id') |> 
+  dplyr::summarize(n = dplyr::n())
+```
+##Task 7
+
+```{r}
+listings |> 
+  dplyr::filter(room_type == "Entire home/apt", !is.na(host_is_superhost)) |> 
+  dplyr::group_by(city, host_is_superhost) |>
+  dplyr::summarize( median_price = median(price, na.rm = TRUE))
+```
+
+#12 
+```{r}
+counts_host <- listings |>
+  dplyr::group_by(host_id) |>
+  dplyr::summarize(n = dplyr::n())
+
+column_joined <- listings |> 
+  dplyr::left_join(counts_host, by = "host_id")
+
+counts_host |> 
+  dplyr::filter(n >= 10) |> 
+  dplyr::summarize(n = dplyr::n())
+
+column_joined |> 
+  dplyr::group_by(city) |> 
+  dplyr::summarize(percent = mean(n>=10)*100)
+
+listings |> 
+  dplyr::arrange(desc(estimated_revenue_l365d)) |> 
+  dplyr::group_by(city) |> 
+  dplyr::mutate(top10percent = dplyr::row_number() <= ceiling(0.10 * dplyr::n())) |> 
+dplyr::summarize(percent = 100 * sum(estimated_revenue_l365d[top10percent], na.rm = TRUE) /
+sum(estimated_revenue_l365d, na.rm = TRUE) )
+```
+
