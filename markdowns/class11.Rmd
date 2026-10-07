@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##Re-examining the bulletin example
 
-Let us try to expand on the example from last class to includ the following: [ACC](https://bulletin.miamioh.edu/courses-instruction/acc/), [BUS](https://bulletin.miamioh.edu/courses-instruction/bus/), [ISA](https://bulletin.miamioh.edu/courses-instruction/isa/), and [MKT](https://bulletin.miamioh.edu/courses-instruction/mkt/).
+Let us try to expand on the example from last class to include the following: [ACC](https://bulletin.miamioh.edu/courses-instruction/acc/), [BUS](https://bulletin.miamioh.edu/courses-instruction/bus/), [ISA](https://bulletin.miamioh.edu/courses-instruction/isa/), and [MKT](https://bulletin.miamioh.edu/courses-instruction/mkt/).
 
 **COMMENT:** Obviously, you can repeat the code a few times changin the URL, This would work for a few links but would be quite tedious for large amounts of scraping. We will follow the **Dry Principle**, which stands for **don't repeat yourself**.
 
@@ -100,5 +100,6 @@ year = 2025
 crash_url = paste0('https://www.planecrashinfo.com/', year, '/', year, '.htm')
 
 crash_page = rvest::read_html(crash_url)
+
 ```
 
