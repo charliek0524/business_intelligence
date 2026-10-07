@@ -1,0 +1,44 @@
+---
+title: "hw7"
+date: "2026-10-06"
+output:
+   html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_download: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r FSB_Directory}
+FSB_df = rvest::read_html("https://miamioh.edu/fsb/directory")
+
+FSB_dept = c('Accountancy', 'Economics', 'Entrepreneurship', 'Finance', 'Information%20Systems%20%26%20Analytics', 'Marketing', 'Management')
+
+FSB_dept_df = data.frame() 
+
+for (directory in FSB_dept) {
+  cat( rep("-", 50) , "\n" )
+  print(directory)
+directory_url = paste0(
+    'https://miamioh.edu/fsb/directory/', '/?up=/query/all/all/', directory, '/all'
+  )
+  
+ webpage = rvest::read_html(directory_url)
+ 
+ webpage |> rvest::html_elements("td:nth-child(1)") |> rvest::html_text2() -> department
+ webpage |> rvest::html_elements("td:nth-child(3)") |> rvest::html_elements("a") |> rvest::html_text2() -> name
+ webpage |> rvest::html_elements("td:nth-child(3)") |> rvest::html_elements("i") |> rvest::html_text2() -> position
+ webpage |> rvest::html_elements("td:nth-child(3)") |> rvest::html_elements("a") |> rvest::html_attr("href") -> website
+ 
+ df = data.frame(department, name, position, website)
+ 
+ FSB_dept_df = rbind(FSB_dept_df, df)
+}
+head(FSB_dept_df)
+```
+
