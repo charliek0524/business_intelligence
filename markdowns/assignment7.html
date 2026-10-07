@@ -1596,7 +1596,7 @@ border-radius: 0px;
 
 FSB_dept = c(&#39;Accountancy&#39;, &#39;Economics&#39;, &#39;Entrepreneurship&#39;, &#39;Finance&#39;, &#39;Information%20Systems%20%26%20Analytics&#39;, &#39;Marketing&#39;, &#39;Management&#39;)
 
-FSB_dept_df = data.frame() 
+FSB_dept_df = data.frame(matrix(data= NA, nrow = 0, ncol=4)) 
 
 for (directory in FSB_dept) {
   cat( rep(&quot;-&quot;, 50) , &quot;\n&quot; )
@@ -1610,7 +1610,7 @@ directory_url = paste0(
  webpage |&gt; rvest::html_elements(&quot;td:nth-child(1)&quot;) |&gt; rvest::html_text2() -&gt; department
  webpage |&gt; rvest::html_elements(&quot;td:nth-child(3)&quot;) |&gt; rvest::html_elements(&quot;a&quot;) |&gt; rvest::html_text2() -&gt; name
  webpage |&gt; rvest::html_elements(&quot;td:nth-child(3)&quot;) |&gt; rvest::html_elements(&quot;i&quot;) |&gt; rvest::html_text2() -&gt; position
- webpage |&gt; rvest::html_elements(&quot;td:nth-child(3)&quot;) |&gt; rvest::html_elements(&quot;a&quot;) |&gt; rvest::html_attr(&quot;href&quot;) -&gt; website
+ webpage |&gt; rvest::html_elements(&quot;td:nth-child(3)&quot;) |&gt; rvest::html_elements(&quot;strong &gt; a&quot;) |&gt; rvest::html_attr(&quot;href&quot;) -&gt; website
  
  df = data.frame(department, name, position, website)
  
@@ -1653,7 +1653,7 @@ directory_url = paste0(
 ## 5  http://www.fsb.miamioh.edu/directory/cobabem
 ## 6   http://www.fsb.miamioh.edu/directory/eatont</code></pre>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiaHc3IgpkYXRlOiAiMjAyNi0xMC0wNiIKb3V0cHV0OgogICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgY29kZV9mb2xkaW5nOiBzaG93Ci0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKYGBgCgpgYGB7ciBGU0JfRGlyZWN0b3J5fQpGU0JfZGYgPSBydmVzdDo6cmVhZF9odG1sKCJodHRwczovL21pYW1pb2guZWR1L2ZzYi9kaXJlY3RvcnkiKQoKRlNCX2RlcHQgPSBjKCdBY2NvdW50YW5jeScsICdFY29ub21pY3MnLCAnRW50cmVwcmVuZXVyc2hpcCcsICdGaW5hbmNlJywgJ0luZm9ybWF0aW9uJTIwU3lzdGVtcyUyMCUyNiUyMEFuYWx5dGljcycsICdNYXJrZXRpbmcnLCAnTWFuYWdlbWVudCcpCgpGU0JfZGVwdF9kZiA9IGRhdGEuZnJhbWUoKSAKCmZvciAoZGlyZWN0b3J5IGluIEZTQl9kZXB0KSB7CiAgY2F0KCByZXAoIi0iLCA1MCkgLCAiXG4iICkKICBwcmludChkaXJlY3RvcnkpCmRpcmVjdG9yeV91cmwgPSBwYXN0ZTAoCiAgICAnaHR0cHM6Ly9taWFtaW9oLmVkdS9mc2IvZGlyZWN0b3J5LycsICcvP3VwPS9xdWVyeS9hbGwvYWxsLycsIGRpcmVjdG9yeSwgJy9hbGwnCiAgKQogIAogd2VicGFnZSA9IHJ2ZXN0OjpyZWFkX2h0bWwoZGlyZWN0b3J5X3VybCkKIAogd2VicGFnZSB8PiBydmVzdDo6aHRtbF9lbGVtZW50cygidGQ6bnRoLWNoaWxkKDEpIikgfD4gcnZlc3Q6Omh0bWxfdGV4dDIoKSAtPiBkZXBhcnRtZW50CiB3ZWJwYWdlIHw+IHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJ0ZDpudGgtY2hpbGQoMykiKSB8PiBydmVzdDo6aHRtbF9lbGVtZW50cygiYSIpIHw+IHJ2ZXN0OjpodG1sX3RleHQyKCkgLT4gbmFtZQogd2VicGFnZSB8PiBydmVzdDo6aHRtbF9lbGVtZW50cygidGQ6bnRoLWNoaWxkKDMpIikgfD4gcnZlc3Q6Omh0bWxfZWxlbWVudHMoImkiKSB8PiBydmVzdDo6aHRtbF90ZXh0MigpIC0+IHBvc2l0aW9uCiB3ZWJwYWdlIHw+IHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJ0ZDpudGgtY2hpbGQoMykiKSB8PiBydmVzdDo6aHRtbF9lbGVtZW50cygiYSIpIHw+IHJ2ZXN0OjpodG1sX2F0dHIoImhyZWYiKSAtPiB3ZWJzaXRlCiAKIGRmID0gZGF0YS5mcmFtZShkZXBhcnRtZW50LCBuYW1lLCBwb3NpdGlvbiwgd2Vic2l0ZSkKIAogRlNCX2RlcHRfZGYgPSByYmluZChGU0JfZGVwdF9kZiwgZGYpCn0KaGVhZChGU0JfZGVwdF9kZikKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiaHc3IgpkYXRlOiAiMjAyNi0xMC0wNiIKb3V0cHV0OgogICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgY29kZV9mb2xkaW5nOiBzaG93Ci0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKYGBgCgpgYGB7ciBGU0JfRGlyZWN0b3J5fQpGU0JfZGYgPSBydmVzdDo6cmVhZF9odG1sKCJodHRwczovL21pYW1pb2guZWR1L2ZzYi9kaXJlY3RvcnkiKQoKRlNCX2RlcHQgPSBjKCdBY2NvdW50YW5jeScsICdFY29ub21pY3MnLCAnRW50cmVwcmVuZXVyc2hpcCcsICdGaW5hbmNlJywgJ0luZm9ybWF0aW9uJTIwU3lzdGVtcyUyMCUyNiUyMEFuYWx5dGljcycsICdNYXJrZXRpbmcnLCAnTWFuYWdlbWVudCcpCgpGU0JfZGVwdF9kZiA9IGRhdGEuZnJhbWUobWF0cml4KGRhdGE9IE5BLCBucm93ID0gMCwgbmNvbD00KSkgCgpmb3IgKGRpcmVjdG9yeSBpbiBGU0JfZGVwdCkgewogIGNhdCggcmVwKCItIiwgNTApICwgIlxuIiApCiAgcHJpbnQoZGlyZWN0b3J5KQpkaXJlY3RvcnlfdXJsID0gcGFzdGUwKAogICAgJ2h0dHBzOi8vbWlhbWlvaC5lZHUvZnNiL2RpcmVjdG9yeS8nLCAnLz91cD0vcXVlcnkvYWxsL2FsbC8nLCBkaXJlY3RvcnksICcvYWxsJwogICkKICAKIHdlYnBhZ2UgPSBydmVzdDo6cmVhZF9odG1sKGRpcmVjdG9yeV91cmwpCiAKIHdlYnBhZ2UgfD4gcnZlc3Q6Omh0bWxfZWxlbWVudHMoInRkOm50aC1jaGlsZCgxKSIpIHw+IHJ2ZXN0OjpodG1sX3RleHQyKCkgLT4gZGVwYXJ0bWVudAogd2VicGFnZSB8PiBydmVzdDo6aHRtbF9lbGVtZW50cygidGQ6bnRoLWNoaWxkKDMpIikgfD4gcnZlc3Q6Omh0bWxfZWxlbWVudHMoImEiKSB8PiBydmVzdDo6aHRtbF90ZXh0MigpIC0+IG5hbWUKIHdlYnBhZ2UgfD4gcnZlc3Q6Omh0bWxfZWxlbWVudHMoInRkOm50aC1jaGlsZCgzKSIpIHw+IHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJpIikgfD4gcnZlc3Q6Omh0bWxfdGV4dDIoKSAtPiBwb3NpdGlvbgogd2VicGFnZSB8PiBydmVzdDo6aHRtbF9lbGVtZW50cygidGQ6bnRoLWNoaWxkKDMpIikgfD4gcnZlc3Q6Omh0bWxfZWxlbWVudHMoInN0cm9uZyA+IGEiKSB8PiBydmVzdDo6aHRtbF9hdHRyKCJocmVmIikgLT4gd2Vic2l0ZQogCiBkZiA9IGRhdGEuZnJhbWUoZGVwYXJ0bWVudCwgbmFtZSwgcG9zaXRpb24sIHdlYnNpdGUpCiAKIEZTQl9kZXB0X2RmID0gcmJpbmQoRlNCX2RlcHRfZGYsIGRmKQp9CmhlYWQoRlNCX2RlcHRfZGYpCmBgYAoK</div>
 
 
 </div>
