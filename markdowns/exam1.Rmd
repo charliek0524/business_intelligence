@@ -1,0 +1,127 @@
+---
+title: "exam01"
+output: html_document
+date: "2026-10-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+```
+
+```{r}
+penguins = readr::read_csv("https://raw.githubusercontent.com/fmegahed/isa401/main/data/penguin_captures.csv")
+
+counts <- table(penguins$species)
+print(counts)
+
+penguins$species
+```
+
+```{r}
+crashes_by_day = c(2020, 2241, 2327, 2285, 2380, "1866", 1664)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+sum(crashes_by_day > 300)
+```
+
+```{r}
+library(jsonlite)
+library(dplyr)
+library(purrr)
+str(campus_data)
+names(campus_data)
+# Read the campus JSON file
+campus_data <- fromJSON("https://isa401-find-your-seat.vercel.app/campus.json")
+
+# Filter for Farmer School of Business and extract floor 1 sections
+fsb_data <- campus_data$buildings %>%
+  filter(name == "Farmer School of Business")
+
+# Unnest floors and rooms to count total class sections on floor 1
+floor1_rooms <- fsb_data$floors[[1]] %>%
+  filter(floor == 1)
+
+total_sections <- sum(sapply(floor1_rooms$rooms[[1]]$sections, length))
+print(total_sections)
+```
+
+```{r}
+library(jsonlite)
+
+campus <- fromJSON("https://isa401-find-your-seat.vercel.app/campus.json")
+
+farming_school <- campus$Farmer[
+  vapply(campus$Farmer, function(b) b$name == "Farmer School of Business", logical(1))
+][[1]]
+
+floor_1 <- farming_school$floors[
+  vapply(farming_school$floors, function(f) as.character(f$floor) == "1", logical(1))
+][[1]]
+
+sum(vapply(floor_1$rooms, function(room) {
+  length(room$sections)
+}, integer(1)))
+```
+
+```{r}
+library(jsonlite)
+
+campus_data <- fromJSON(
+  "https://isa401-find-your-seat.vercel.app/campus.json",
+  simplifyVector = FALSE
+)
+
+farmer <- campus_data$Farmer
+
+
+
+# Extract floor 1
+floor1 <- farmer$floors[["1"]]
+
+# Get total class sections
+total_sections <- floor1$sections
+
+print(total_sections)
+print(total_sections)
+
+
+
+campus$Farmer$floors[["1"]]$sections
+
+ncse_tbl = readr::read_csv("https://raw.githubusercontent.com/fmegahed/isa401/main/data/ncse_endowment_us_and_canada_2025.csv")
+dplyr::glimpse(ncse_tbl)
+
+
+jobs |>
+  dplyr::group_by(location_state) |>
+  dplyr::summarise(postings = dplyr::n())
+```
+
+```{r}
+library(ellmer)
+
+# 1. Create a chat object
+chat <- ellmer::chat_openai(model = "gpt-4o-mini")
+
+# 2. Define the Airbnb listing description
+description <- "This one of a kind, turn of the century, fully restored mansion is just waiting for you to come and enjoy the vast amenities this house offers! This historic Victorian Mansion was built in the last 1800's and has been fully restored and updated with one thing in mind--luxury! We boast a slate pool table, 10 person hot tub, a custom made fire table, a built in giant projector screen for streaming, arcade games, and much much more! We comfortably sleep 19 guests with 9 dedicated bedrooms."
+
+# 3. Define the structured output schema
+schema <- ellmer::type_object(
+  property_type = ellmer::type_string(),
+  max_guests = ellmer::type_integer(),
+  num_bedrooms = ellmer::type_integer(),
+  key_amenities = ellmer::type_string(
+    "List key amenities separated by |"
+  )
+)
+
+# 4. Extract structured information
+result <- chat$chat_structured(
+  description,
+  type = schema
+)
+
+# 5. Display results
+print(result)
+```
+
