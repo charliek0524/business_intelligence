@@ -1,0 +1,27 @@
+---
+title: "practiceExam1"
+output: html_document
+date: "2026-10-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+getwd()
+file.exists("../data/hibp_data.json")
+
+crashes_json = jsonlite::fromJSON("../data/hibp_data.json")
+dplyr::glimpse(crashes_json)
+
+dplyr::glimpse(crashes_json[500,])
+
+
+```
+
+```{r}
+
+robotstxt::paths_allowed(paths = "/wiki/Miami_University", domain = "https://en.wikipedia.org", bot = "*")
+```
+

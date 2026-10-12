@@ -19,7 +19,7 @@ FSB_df = rvest::read_html("https://miamioh.edu/fsb/directory")
 
 FSB_dept = c('Accountancy', 'Economics', 'Entrepreneurship', 'Finance', 'Information%20Systems%20%26%20Analytics', 'Marketing', 'Management')
 
-FSB_dept_df = data.frame(matrix(data= NA, nrow = 0, ncol=4)) 
+FSB_dept_df = data.frame()
 
 for (directory in FSB_dept) {
   cat( rep("-", 50) , "\n" )

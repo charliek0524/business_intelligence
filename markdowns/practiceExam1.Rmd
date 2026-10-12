@@ -1,0 +1,78 @@
+---
+title: "practiceExam1"
+output: html_document
+date: "2026-10-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+crashes_json = jsonlite::fromJSON("../data/hibp_data.json")
+dplyr::glimpse(crashes_json)
+
+dplyr::glimpse(crashes_json[500,])
+
+crashes_json |>
+  dplyr::filter(endsWith(Email, "miamioh.edu")) 
+```
+
+
+```{r}
+mu_page <- rvest::read_html(
+  "https://miamioh.edu/policy-library/students/undergraduate/academic-regulations/"
+)
+
+mu_policies <- mu_page |>
+  rvest::html_elements("a.news-lockup__body-link") |>
+  rvest::html_attr("href") 
+  
+
+ mu_policies
+ 
+ length(mu_policies)
+```
+
+
+```{r}
+swim_page <- rvest::read_html(
+  "https://miamiredhawks.com/sports/swimming-and-diving/roster"
+)
+
+swim_page |> 
+  rvest::html_elements("div > a > h3") |> 
+  rvest::html_text2() -> name
+length(name)
+swim_page |> 
+  rvest::html_elements("span.s-person-card__content__person__location-item") |> 
+  rvest::html_text2() -> location
+length(location)
+
+swim_df = data.frame(name[1:52], location)
+```
+
+```{r}
+
+robotstxt::paths_allowed(paths = "/wiki/Miami_University", domain = "https://en.wikipedia.org", bot = "*")
+```
+
+
+
+
+
+
+
+```{r}
+# reading the data from my github repo to avoid an issues with file location
+ntse_tbl = readr::read_csv('../data/ntse_endowment_us_and_canada_2020.csv')
+
+# a glimpse of the data
+# for this analysis, do NOT convert chr to factors (do not worry about this)
+dplyr::glimpse(ntse_tbl)
+
+ntse_tbl$id = as.factor(ntse_tbl$id)
+ntse_tbl$hbcu_indicator = as.factor(ntse_tbl$hbcu_indicator)
+ntse_tbl$carnegie_category = as.factor(ntse_tbl$carnegie_category)
+```
+
